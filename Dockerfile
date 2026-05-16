@@ -18,6 +18,7 @@ WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader
 
 RUN chmod -R 775 storage bootstrap/cache || true
+RUN rm -f bootstrap/cache/*.php || true
 
 RUN php artisan config:clear || true
 RUN php artisan route:clear || true

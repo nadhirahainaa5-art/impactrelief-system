@@ -17,12 +17,12 @@ WORKDIR /var/www/html
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan key:generate --force || true
+RUN chmod -R 775 storage bootstrap/cache || true
+
 RUN php artisan config:clear || true
 RUN php artisan route:clear || true
 RUN php artisan view:clear || true
 RUN php artisan cache:clear || true
 RUN php artisan storage:link || true
-RUN php artisan migrate --force || true
 
 CMD ["/start.sh"]
